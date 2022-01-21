@@ -1,0 +1,11 @@
+---
+instances:
+  - name: mitzicom1
+    keypair: b606-keypair
+    image: rhel-8.3
+    flavor: GLOBAL-CPU_4_Memory_8192_Disk_30_flavor
+    security_group: b606-HostSG
+    internal_network: b606-dev-network
+    metadata:
+      AnsibleGroup: osp_instances
+      deployment_name: dev
