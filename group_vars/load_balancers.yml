@@ -1,0 +1,8 @@
+---
+load_balancer_port: 80
+
+firewall_services:
+  - http
+
+load_balancer_packages:
+  - haproxy

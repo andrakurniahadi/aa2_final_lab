@@ -1,0 +1,55 @@
+---
+guid: d96a
+dns_nameserver: 192.168.50.231
+
+# OpenStack vars
+os_server_cloud: "{{ guid }}-project"
+
+os_server_instance_details:
+  - name: app1
+    image: rhel-8.3
+    key_name: "{{ guid }}-keypair"
+    flavor: GLOBAL-CPU_4_Memory_8192_Disk_30_flavor
+    security_groups:
+      - "{{ guid }}-HostSG"
+    nics:
+      - net-name: "{{ guid }}-dev-network"
+    meta:
+      AnsibleGroup: app_servers
+  - name: app2
+    image: rhel-8.3
+    key_name: "{{ guid }}-keypair"
+    flavor: GLOBAL-CPU_4_Memory_8192_Disk_30_flavor
+    security_groups:
+      - "{{ guid }}-HostSG"
+    nics:
+      - net-name: "{{ guid }}-dev-network"
+    meta:
+      AnsibleGroup: app_servers
+  - name: frontend1
+    image: rhel-8.3
+    key_name: "{{ guid }}-keypair"
+    flavor: GLOBAL-CPU_4_Memory_8192_Disk_30_flavor
+    security_groups:
+      - "{{ guid }}-HostSG"
+    nics:
+      - net-name: "{{ guid }}-dev-network"
+    meta:
+      AnsibleGroup: load_balancers
+  - name: appdb1
+    image: rhel-8.3
+    key_name: "{{ guid }}-keypair"
+    flavor: GLOBAL-CPU_4_Memory_8192_Disk_30_flavor
+    security_groups:
+      - "{{ guid }}-HostSG"
+    nics:
+      - net-name: "{{ guid }}-dev-network"
+    meta:
+      AnsibleGroup: database_servers
+
+# Satellite vars
+register_satellite_info:
+  server: satellite.example.com
+  activation_key: gpte-labs-rhel8
+  organisation: prod
+  katello_cert: http://satellite.example.com/pub/katello-ca-consumer-latest.noarch.rpm
