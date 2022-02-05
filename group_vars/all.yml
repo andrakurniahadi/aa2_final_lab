@@ -46,10 +46,3 @@ os_server_instance_details:
       - net-name: "{{ guid }}-dev-network"
     meta:
       AnsibleGroup: database_servers
-
-# Satellite vars
-register_satellite_info:
-  server: satellite.example.com
-  activation_key: gpte-labs-rhel8
-  organisation: prod
-  katello_cert: http://satellite.example.com/pub/katello-ca-consumer-latest.noarch.rpm
