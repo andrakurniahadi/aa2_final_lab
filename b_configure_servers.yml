@@ -1,0 +1,37 @@
+---
+- name: Base configuration of OpenStack instances
+  hosts:
+    - load_balancers
+    - app_servers
+    - database_servers
+  gather_facts: no
+  become: yes
+
+  tags:
+    - database_servers
+    - application_servers
+    - load_balancers
+
+  pre_tasks:
+    - name: Wait until servers are reachable
+      wait_for_connection:
+        timeout: 300
+
+    - name: Configure DNS
+      lineinfile:
+        path: /etc/sysconfig/network-scripts/ifcfg-eth0
+        line: "{{ item }}"
+        state: present
+      loop:
+        - PEERDNS=no
+        - DNS1={{ dns_nameserver }}
+      notify: restart_network
+
+  roles:
+    - register_satellite
+
+  handlers:
+    - name: restart_network
+      service:
+        name: NetworkManager
+        state: restarted
