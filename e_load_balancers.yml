@@ -1,0 +1,12 @@
+---
+- name: Install and configure load balancers
+  hosts: load_balancers
+  gather_facts: no
+  become: yes
+
+  tags:
+    - load_balancers
+
+  roles:
+    - firewall
+    - haproxy

@@ -1,0 +1,15 @@
+---
+- name: Tear down all infrastructure
+  hosts:
+    - load_balancers
+    - app_servers
+    - database_servers
+  gather_facts: no
+  become: no
+
+  tasks:
+    - name: Delete OpenStack instances
+      os_server:
+        name: "{{ inventory_hostname }}"
+        state: absent
+      delegate_to: localhost
