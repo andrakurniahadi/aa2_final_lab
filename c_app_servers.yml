@@ -1,0 +1,13 @@
+---
+- name: Install and configure application servers
+  hosts: app_servers
+  gather_facts: no
+  become: yes
+
+  tags:
+    - application_servers
+    - flask
+
+  roles:
+    - firewall
+    - flask_app
