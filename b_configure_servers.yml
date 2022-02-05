@@ -27,8 +27,8 @@
         - DNS1={{ dns_nameserver }}
       notify: restart_network
 
-  roles:
-    - register_satellite
+#  roles:
+#    - register_satellite
 
   handlers:
     - name: restart_network
